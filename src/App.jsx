@@ -6,6 +6,8 @@ import LandingPage from "./pages/landing";
 import Dashboard from "./pages/dashboard";
 import LinkPage from "./pages/link";
 import RedirectLink from "./pages/redirect-link";
+import UserContextProvider from "./context/userContext";
+import ProtectedRoute from "./components/protected-rotes";
 
 const router = createBrowserRouter([
   {
@@ -21,22 +23,38 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <Dashboard />,
+        element: (
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/link/:id",
-        element: <LinkPage />,
+        element: (
+          <ProtectedRoute>
+            <LinkPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/:id",
-        element: <RedirectLink />,
+        element: (
+          <ProtectedRoute>
+            <RedirectLink />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <UserContextProvider>
+      <RouterProvider router={router} />
+    </UserContextProvider>
+  );
 }
 
 export default App;

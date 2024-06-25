@@ -9,9 +9,9 @@ const AppLayout = () => {
         {/* content */}
         <Outlet />
       </main>
-      <div className="mt-10 flex flex-col bg-gray-800 p-10 text-center">
+      <div className="mt-10 flex w-full flex-col bg-gray-800 p-10 text-center">
         <p>Made with 💖 by Likhith.</p>
-        <p>© 2024 Likhith urlshortener.ai</p>
+        <p>Copyright © 2024 Likhith shrinklr.ai</p>
       </div>
     </>
   );
