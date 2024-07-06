@@ -15,9 +15,9 @@ import * as Yup from "yup";
 import { useSupabaseLogin } from "@/hooks";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSearchParams } from "react-router-dom";
 import { UserState } from "@/context/userContext";
-const Login = () => {
+// eslint-disable-next-line react/prop-types
+const Login = ({ longUrl }) => {
   const [errors, setErrors] = useState([]);
   const [formData, setFormData] = useState({
     email: "",
@@ -33,7 +33,7 @@ const Login = () => {
       [name]: value,
     }));
   };
-
+  const { fetchUser } = UserState();
   const handleLogin = async () => {
     setErrors([]);
     try {
@@ -58,18 +58,19 @@ const Login = () => {
     }
   };
   const navigate = useNavigate();
-  let [params] = useSearchParams();
-  const longUrl = params.get("createNew");
-  const { fetchUser } = UserState();
+  // let [params] = useSearchParams();
+  // const longUrl = params.get("createNew");
+
   useEffect(() => {
     console.log(data);
     if (error === null && data) {
-      navigate(`/dashboard?${longUrl ? `createNew=${longUrl}` : ""}`);
+      console.log("Inside login.jsx 68", longUrl);
       fetchUser();
+      navigate(`/dashboard?${longUrl ? `createNew=${longUrl}` : ""}`);
     }
     console.log(error);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, error]);
+  }, [error, data]);
   return (
     <Card>
       <CardHeader>

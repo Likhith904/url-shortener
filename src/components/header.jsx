@@ -14,16 +14,17 @@ import { LogOut } from "lucide-react";
 import { LinkIcon } from "lucide-react";
 import { UserState } from "@/context/userContext";
 import { useSupabaseLogout } from "@/hooks";
-import { HashLoader } from "react-spinners";
+import { BeatLoader } from "react-spinners";
 import { useQueryClient } from "@tanstack/react-query";
 
 const Header = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { user, fetchUser } = UserState();
-  const { mutate, isLoading } = useSupabaseLogout();
+  const { mutate, isPending } = useSupabaseLogout();
 
   const handleLogout = async () => {
+    console.log(isPending);
     mutate(null, {
       onSuccess: async () => {
         console.log("Logout successful");
@@ -63,8 +64,9 @@ const Header = () => {
                   {user?.user_metadata?.name}
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => navigate("/link/1")}>
+                <DropdownMenuItem onClick={() => navigate("/link")}>
                   <LinkIcon className="mr-2 h-4 w-4" />
+                  <Link></Link>
                   <span>My links</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="text-red-400">
@@ -75,8 +77,13 @@ const Header = () => {
             </DropdownMenu>
           )}
         </div>
-        {isLoading && (
-          <HashLoader className="mb-4" width={"100%"} color="#36d7b7" />
+        {isPending && (
+          <BeatLoader
+            className="mb-4"
+            size={10}
+            width={"100%"}
+            color="#36d7b7"
+          />
         )}
       </nav>
     </>
