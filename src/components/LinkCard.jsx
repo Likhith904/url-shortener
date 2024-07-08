@@ -5,7 +5,7 @@ import { Copy, Download, Trash } from "lucide-react";
 import { Button } from "./ui/button";
 import { useDeleteUrls } from "@/hooks/useDeleteUrl";
 import { BeatLoader } from "react-spinners";
-// import { saveAs } from "file-saver";
+import { saveAs } from "file-saver";
 // import { useQueryClient } from "@tanstack/react-query";
 const LinkCard = ({ url, fetchUrls }) => {
   const handleDownload = async () => {
@@ -16,14 +16,14 @@ const LinkCard = ({ url, fetchUrls }) => {
       const response = await fetch(imageUrl);
       const blob = await response.blob();
 
-      const a = document.createElement("a");
-      a.href = blob;
-      a.download = fileName + ".jpg";
+      // const a = document.createElement("a");
+      // a.href = blob;
+      // a.download = fileName + ".jpg";
 
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      //   saveAs(blob, fileName);
+      // document.body.appendChild(a);
+      // a.click();
+      // document.body.removeChild(a);
+      saveAs(blob, fileName);
     } catch (error) {
       console.log(error.message);
     }

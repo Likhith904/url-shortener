@@ -16,6 +16,7 @@ import { UserState } from "@/context/userContext";
 import { useSupabaseLogout } from "@/hooks";
 import { BeatLoader } from "react-spinners";
 import { useQueryClient } from "@tanstack/react-query";
+import { LayoutDashboardIcon } from "lucide-react";
 
 const Header = () => {
   const queryClient = useQueryClient();
@@ -64,14 +65,24 @@ const Header = () => {
                   {user?.user_metadata?.name}
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => navigate("/link")}>
-                  <LinkIcon className="mr-2 h-4 w-4" />
-                  <Link></Link>
-                  <span>My links</span>
+                <DropdownMenuItem>
+                  <LayoutDashboardIcon className="mr-2 h-4 w-4" />
+                  <Link to="/dashboard">
+                    <span>Dashboard</span>
+                  </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-red-400">
+                <DropdownMenuItem>
+                  <LinkIcon className="mr-2 h-4 w-4" />
+                  <Link to="/link">
+                    <span>My Links</span>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  className="text-red-400"
+                  onClick={handleLogout}
+                >
                   <LogOut className="mr-2 h-4 w-4" />
-                  <span onClick={handleLogout}>Logout</span>
+                  <span>Logout</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

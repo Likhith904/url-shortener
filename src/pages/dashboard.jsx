@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { BarLoader } from "react-spinners";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Filter } from "lucide-react";
 import { useGetClicks } from "@/hooks/useGetClicks";
@@ -9,6 +8,7 @@ import { useGetUrls } from "@/hooks/useGetUrls";
 import Error from "@/components/error.jsx";
 import { UserState } from "@/context/userContext";
 import LinkCard from "@/components/LinkCard";
+import CreateLink from "@/components/CreateLink";
 
 const Dashboard = () => {
   const [search, setSearch] = useState("");
@@ -37,7 +37,7 @@ const Dashboard = () => {
   }, [urls?.length, search]);
 
   const filteredUrls = urls?.filter((url) =>
-    url.title.toLowerCase().includes(search.toLowerCase()),
+    url?.title.toLowerCase().includes(search.toLowerCase()),
   );
   return (
     <div className="flex flex-col gap-8">
@@ -65,7 +65,7 @@ const Dashboard = () => {
 
       <div className="flex justify-between">
         <h1 className="text-4xl font-extrabold">My Links</h1>
-        <Button>Create Link</Button>
+        <CreateLink />
       </div>
       <div className="relative">
         <Input
