@@ -58,3 +58,75 @@ export const deleteUrls = async (id) => {
 
   return id;
 };
+
+export const getLongUrl = async ({ short_url }) => {
+  const { data, error } = await supabase
+    .from("urls")
+    .select("id,original_url")
+    .or(`short_url.eq.${short_url},custom_url.eq.${short_url}`)
+    .single();
+
+  if (error) {
+    console.log(error.message);
+    throw new Error(
+      "Error fetching the long url or check the url that u have entered",
+    );
+  }
+
+  return data;
+};
+
+export const getLongUrl1 = async ({ id }) => {
+  // try {
+  //   const { data, error } = await supabase
+  //     .from("urls")
+  //     .select("id,original_url")
+  //     .or(`short_url.eq.${id},custom_url.eq.${id}`)
+  //     .single();
+  //   // if (error) {
+  //   //   console.log(error.message);
+  //   //   console.error(
+  //   //     "Cannot fetch the long url or the url u entered might be invalid",
+  //   //     error.message,
+  //   //   );
+  //   // throw new Error("Error fetching the short link");
+  //   // return;
+  //   return { data, error };
+  // } catch (err) {
+  //   // if (!data) {
+  //   //   throw new Error("No data found for the provided ID.");
+  //   // }
+  //   console.error(
+  //     "Cannot fetch the long URL or the URL you entered might be invalid:",
+  //     err.message,
+  //   );
+  //   throw err; // Re-throw the error to be handled in the component
+  // }
+  let { data: shortLinkData, error: shortLinkError } = await supabase
+    .from("urls")
+    .select("id, original_url")
+    .or(`short_url.eq.${id},custom_url.eq.${id}`)
+    .single();
+
+  if (shortLinkError && shortLinkError.code !== "PGRST116") {
+    console.error("Error fetching short link:", shortLinkError);
+    return;
+  }
+
+  return shortLinkData;
+};
+
+export const getUrl = async ({ id, user_id }) => {
+  const { data, error } = await supabase
+    .from("urls")
+    .select("*")
+    .eq("id", id)
+    .eq("user_id", user_id)
+    .single();
+  if (error) {
+    console.log(error.message);
+    throw new Error("Short url not found");
+  }
+
+  return data;
+};

@@ -49,7 +49,7 @@ const LinkCard = ({ url, fetchUrls }) => {
         src={url?.qr_code}
         className="h-32 self-start object-contain ring ring-blue-500"
       />
-      <Link to={`link/${url?.id}`} className="flex flex-1 flex-col">
+      <Link to={`/link/${url?.id}`} className="flex flex-1 flex-col">
         <span className="flex cursor-pointer text-3xl font-extrabold hover:underline">
           {url?.title}
         </span>
@@ -69,7 +69,8 @@ const LinkCard = ({ url, fetchUrls }) => {
           <Copy
             onClick={() =>
               window.navigator.clipboard.writeText(
-                `https://shrinklr.in/${url?.short_url}`,
+                // `https://shrinklr.in/${url?.short_url}`,
+                `http:localhost:5173/${url?.short_url}`,
               )
             }
           />

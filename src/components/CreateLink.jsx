@@ -130,7 +130,7 @@ const CreateLink = () => {
           {error && <Error message={error.message} />}
           <DialogFooter className="sm:justify-start">
             <Button onClick={handleCreateUrl} variant="destructive">
-              {isPending ? <BeatLoader size={10} color="#38d6b7" /> : "Create"}
+              {isPending ? <BeatLoader size={10} color="#7fffd4" /> : "Create"}
             </Button>
           </DialogFooter>
         </DialogContent>

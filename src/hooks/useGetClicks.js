@@ -1,10 +1,10 @@
 import { getClicksForUrls } from "@/db/apiClicks";
 import { useQuery } from "@tanstack/react-query";
 
-export const useGetClicks = (user_ids) => {
+export const useGetClicks = (url_ids) => {
   return useQuery({
-    queryKey: ["clicksForUrls", user_ids],
-    queryFn: () => getClicksForUrls(user_ids),
-    enabled: Array.isArray(user_ids) && user_ids.length > 0,
+    queryKey: ["clicksForUrls", url_ids],
+    queryFn: () => getClicksForUrls(url_ids),
+    enabled: Array.isArray(url_ids) && url_ids.length > 0,
   });
 };
