@@ -43,7 +43,7 @@ const Header = () => {
     <>
       <nav className="items-centers flex justify-between py-4">
         <Link to="/">
-          <img src="./logo1.png" className="h-12" alt="url shortener logo" />
+          <img src="/logo1.png" className="h-12" alt="url shortener logo" />
         </Link>
         {/* //TODO: add breadcrumb to show the navigation */}
         <div>
@@ -73,7 +73,7 @@ const Header = () => {
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <LinkIcon className="mr-2 h-4 w-4" />
-                  <Link to="/link">
+                  <Link to="/dashboard">
                     <span>My Links</span>
                   </Link>
                 </DropdownMenuItem>

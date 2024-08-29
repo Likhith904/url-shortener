@@ -100,7 +100,7 @@ const LinkPage = () => {
         <BarLoader className="mb-4" width={"100%"} color="36d7b7" />
       )}
 
-      <div className="flex flex-col justify-normal gap-8 sm:flex-row">
+      <div className="flex flex-col justify-start gap-8 sm:flex-row">
         <div className="flex flex-col items-start gap-8 rounded-lg sm:w-2/5">
           <span className="cursor-pointer text-6xl font-extrabold hover:underline">
             {data?.title}
@@ -138,8 +138,9 @@ const LinkPage = () => {
               ) : (
                 <Copy
                   onClick={() => {
+                    //todo: change the localhost to something of a domain
                     navigator.clipboard
-                      .writeText(`https://shrinklr.in/${data?.short_url}`)
+                      .writeText(`http://localhost:5173/${data?.short_url}`)
                       .then(() => {
                         setCopied(true);
                         setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
@@ -164,11 +165,23 @@ const LinkPage = () => {
         </div>
         <Card>
           <CardHeader>
-            <CardTitle>Card Title</CardTitle>
+            <CardTitle className="w-full text-4xl font-extrabold">
+              Stats
+            </CardTitle>
           </CardHeader>
           {stats && stats?.length ? (
-            <CardContent>
-              <p>Card Content</p>
+            <CardContent className="flex flex-col gap-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Total Clicks</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p>{stats?.length}</p>
+                </CardContent>
+              </Card>
+
+              <CardTitle>Location Data</CardTitle>
+              <CardTitle>Device Data</CardTitle>
             </CardContent>
           ) : (
             <CardContent>

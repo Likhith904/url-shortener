@@ -19,7 +19,7 @@ const redirectLink = () => {
     short_url: id,
   });
 
-  const { isLoading: loadingStats, refetch: getStats } = useStoreClicks({
+  const { isFetching: loadingStats, mutate } = useStoreClicks({
     url_id: data?.id,
     original_url: data?.original_url,
   });
@@ -29,10 +29,10 @@ const redirectLink = () => {
   }, []);
 
   useEffect(() => {
-    if (!isLoading && data) {
-      getStats();
+    if (!isLoading && data && data.id) {
+      mutate();
     }
-  }, [data, getStats, isLoading]);
+  }, [data, isLoading, mutate]);
 
   if (error) {
     return <>Error:{error.message}</>;
