@@ -26,7 +26,7 @@ const Signup = () => {
     profile_pic: null,
   });
 
-  const { mutate, isLoading, isError, error, data } = useSupabaseSignup();
+  const { mutate, isPending, isError, error, data } = useSupabaseSignup();
 
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
@@ -123,7 +123,7 @@ const Signup = () => {
       </CardContent>
       <CardFooter className="flex flex-col items-center">
         <Button onClick={handleSignup}>
-          {isLoading ? (
+          {isPending ? (
             <PulseLoader size={10} color="#36d7b7" />
           ) : (
             "Create Account"

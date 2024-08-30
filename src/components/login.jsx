@@ -24,7 +24,7 @@ const Login = ({ longUrl }) => {
     password: "",
   });
 
-  const { mutate, isLoading, isError, error, data } = useSupabaseLogin();
+  const { mutate, isPending, isError, error, data } = useSupabaseLogin();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -100,7 +100,7 @@ const Login = ({ longUrl }) => {
       </CardContent>
       <CardFooter className="flex flex-col items-center">
         <Button onClick={handleLogin}>
-          {isLoading ? <PulseLoader size={10} color="#36d7b7" /> : "Login"}
+          {isPending ? <PulseLoader size={10} color="#36d7b7" /> : "Login"}
         </Button>
       </CardFooter>
     </Card>

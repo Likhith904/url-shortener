@@ -5,7 +5,7 @@ import { useStoreClicks } from "@/hooks/useStoreClicks";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { BarLoader } from "react-spinners";
-
+import Error from "@/components/error";
 const redirectLink = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { id } = useParams();
@@ -35,7 +35,7 @@ const redirectLink = () => {
   }, [data, isLoading, mutate]);
 
   if (error) {
-    return <>Error:{error.message}</>;
+    return <Error message={error.message} />;
   }
 
   if (isLoading || loadingStats) {

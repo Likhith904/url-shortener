@@ -6,8 +6,13 @@ import { Button } from "./ui/button";
 import { useDeleteUrls } from "@/hooks/useDeleteUrl";
 import { BeatLoader } from "react-spinners";
 import { saveAs } from "file-saver";
+import { useState } from "react";
+import { ClipboardCheck } from "lucide-react";
 // import { useQueryClient } from "@tanstack/react-query";
+// eslint-disable-next-line react-hooks/rules-of-hooks
+
 const LinkCard = ({ url, fetchUrls }) => {
+  const [copied, setCopied] = useState(false);
   const handleDownload = async () => {
     const imageUrl = url?.qr_code;
     const fileName = url?.title;
@@ -66,14 +71,29 @@ const LinkCard = ({ url, fetchUrls }) => {
       </Link>
       <div>
         <Button variant="ghost">
-          <Copy
+          {/* <Copy
             onClick={() =>
               window.navigator.clipboard.writeText(
                 // `https://shrinklr.in/${url?.short_url}`,
-                `http:localhost:5173/${url?.short_url}`,
+                `shrinklr.vercel.app/${url?.short_url}`,
               )
             }
-          />
+          /> */}
+          {copied ? (
+            <ClipboardCheck />
+          ) : (
+            <Copy
+              onClick={() => {
+                //todo: change the localhost to something of a domain
+                navigator.clipboard
+                  .writeText(`shrinklr.vercel.app/${url?.short_url}`)
+                  .then(() => {
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
+                  });
+              }}
+            />
+          )}
         </Button>
         <Button variant="ghost" onClick={handleDownload}>
           <Download />

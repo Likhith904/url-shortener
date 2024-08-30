@@ -140,7 +140,7 @@ const LinkPage = () => {
                   onClick={() => {
                     //todo: change the localhost to something of a domain
                     navigator.clipboard
-                      .writeText(`http://localhost:5173/${data?.short_url}`)
+                      .writeText(`shrinklr.vercel.app/${data?.short_url}`)
                       .then(() => {
                         setCopied(true);
                         setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
