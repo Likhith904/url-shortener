@@ -15,6 +15,8 @@ import { redirect } from "react-router-dom";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import DeviceStats from "@/components/device-stats";
+import LocationStats from "@/components/location-stats";
 
 const LinkPage = () => {
   const [copied, setCopied] = useState(false);
@@ -163,7 +165,7 @@ const LinkPage = () => {
             alt="qr code"
           />
         </div>
-        <Card>
+        <Card className="sm:w-3/5">
           <CardHeader>
             <CardTitle className="w-full text-4xl font-extrabold">
               Stats
@@ -181,7 +183,9 @@ const LinkPage = () => {
               </Card>
 
               <CardTitle>Location Data</CardTitle>
-              <CardTitle>Device Data</CardTitle>
+              <LocationStats stats={stats} />
+              <CardTitle>Device Info</CardTitle>
+              <DeviceStats stats={stats} />
             </CardContent>
           ) : (
             <CardContent>

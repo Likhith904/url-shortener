@@ -12,9 +12,10 @@ export const getClicksForUrls = async (url_ids) => {
 
   return data; //if no user is there return null
 };
-const parser = new UAParser();
+// const parser = new UAParser();
 export const storeClicks = async ({ url_id, original_url }) => {
   try {
+    const parser = new UAParser();
     const res = parser.getResult();
     const device = res?.type || "desktop";
 
