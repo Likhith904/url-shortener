@@ -21,7 +21,7 @@ export const storeClicks = async ({ url_id, original_url }) => {
   try {
     // const parser = new UAParser();
     // const res = parser.getResult();
-    const res = deviceDetector.parse(userAgent);
+    const res = deviceDetector.parse(window.navigator.userAgent);
     console.log(res);
     const device = res.device?.type || "desktop";
 
