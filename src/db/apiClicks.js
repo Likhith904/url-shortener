@@ -1,4 +1,5 @@
-import UAParser from "ua-parser-js";
+// import UAParser from "ua-parser-js";
+import DeviceDetector from "device-detector-js";
 import supabase from "./supabase";
 export const getClicksForUrls = async (url_ids) => {
   const { data, error } = await supabase
@@ -12,12 +13,17 @@ export const getClicksForUrls = async (url_ids) => {
 
   return data; //if no user is there return null
 };
-// const parser = new UAParser();
+// let parser = new UAParser("user-agent");
+let deviceDetector = new DeviceDetector();
+const userAgent =
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36";
 export const storeClicks = async ({ url_id, original_url }) => {
   try {
-    const parser = new UAParser();
-    const res = parser.getResult();
-    const device = res?.type || "desktop";
+    // const parser = new UAParser();
+    // const res = parser.getResult();
+    const res = deviceDetector.parse(userAgent);
+    console.log(res);
+    const device = res.device?.type || "desktop";
 
     let city = "Unknown";
     let country = "Unknown";
