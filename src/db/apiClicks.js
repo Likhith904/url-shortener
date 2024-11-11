@@ -15,8 +15,8 @@ export const getClicksForUrls = async (url_ids) => {
 };
 // let parser = new UAParser("user-agent");
 let deviceDetector = new DeviceDetector();
-const userAgent =
-  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36";
+// const userAgent =
+// "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36";
 export const storeClicks = async ({ url_id, original_url }) => {
   try {
     // const parser = new UAParser();

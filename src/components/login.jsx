@@ -19,12 +19,26 @@ import { UserState } from "@/context/userContext";
 // eslint-disable-next-line react/prop-types
 const Login = ({ longUrl }) => {
   const [errors, setErrors] = useState([]);
+  const [isAutofilled, setIsAutofilled] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-
+  const guestCredentials = {
+    email: "test@example.com",
+    password: "test123",
+  };
   const { mutate, isPending, isError, error, data } = useSupabaseLogin();
+
+  const handleMouseClick = () => {
+    if (!isAutofilled) {
+      setFormData({
+        email: guestCredentials.email,
+        password: guestCredentials.password,
+      });
+      setIsAutofilled(true);
+    }
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -79,12 +93,13 @@ const Login = ({ longUrl }) => {
         {isError && <Error message={error.message} />}
       </CardHeader>
       <CardContent className="space-y-2">
-        <div className="space-y-1.5">
+        <div className="space-y-1.5" onMouseDownCapture={handleMouseClick}>
           <Input
             name="email"
             type="email"
             placeholder="Enter your email"
             onChange={handleInputChange}
+            value={formData.email}
           />
           {errors.email && <Error message={errors.email} />}
         </div>
@@ -94,6 +109,7 @@ const Login = ({ longUrl }) => {
             type="password"
             placeholder="Enter your password"
             onChange={handleInputChange}
+            value={formData.password}
           />
           {errors.password && <Error message={errors.password} />}
         </div>
